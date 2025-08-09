@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personal Birthday Surprise!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+    :root {
+      --primary: #ff6b6b;
+      --secondary: #ffb8b8;
+      --accent: #ffd166;
+      --light: #f7fff7;
+      --dark: #292f36;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(-45deg, #ffd3b6, #ffaaa5, #dcedc1, #a8e6cf);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      padding: 2rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .birthday-img {
+      width: 70%;
+      max-width: 300px;
+      margin: 1rem auto;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .birthday-img:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    .message {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin: 1.5rem 0;
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+    }
+
+    button:hover {
+      background-color: #ff5252;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(255, 107, 107, 0.4);
+    }
+
+    .hidden { display: none; }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: var(--primary);
+      animation: confettiFall 5s linear infinite;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    .cake {
+      font-size: 3rem;
+      margin: 1rem 0;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .balloon {
+      position: absolute;
+      width: 40px;
+      height: 60px;
+      background-color: var(--accent);
+      border-radius: 50% 50% 45% 45%;
+      animation: float 10s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0); opacity: 0.7; }
+      100% { transform: translateY(-120vh) rotate(360deg); opacity: 1; }
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--dark);
+    }
+
+    .whatsapp-btn { background-color: #25d366; margin-top: 2rem; }
+
+    .gift-box {
+      width: 100px;
+      height: 100px;
+      background-color: #ffd166;
+      border: 5px solid var(--primary);
+      border-radius: 10px;
+      position: relative;
+      margin: 1rem auto;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--dark);
+      transition: transform 0.3s ease;
+      animation: shake 1s infinite alternate;
+    }
+
+    .gift-box:hover { transform: scale(1.05); }
+
+    .gift-box:after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: var(--primary);
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0); }
+      50% { transform: rotate(2deg); }
+      100% { transform: rotate(-2deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="welcome-message">Selamat datang, Alin!</h1>
+    <div class="gift-box" id="gift-box">🎁</div>
+    <div id="surprise-section" class="hidden">
+      <h1>Selamat Ulang Tahun, Alin!</h1>
+      <div class="cake">🎂</div>
+      <img src="p21.png" alt="Birthday" class="birthday-img" />
+      <p class="message">Ini adalah hari spesialmu, Alin!<br>Semoga tahun ini penuh kebahagiaan, kesehatan, dan semua impianmu terwujud.</p>
+      <p class="message">Kami sangat beruntung memiliki kamu dalam hidup ini. Selamat menikmati hari istimewamu!</p>
+      <a href="https://wa.me/6283826528902" target="_blank">
+        <button class="whatsapp-btn">Chat Pembuat 🎁</button>
+      </a>
+    </div>
+
+    <footer>❤ Created for your special day</footer>
+  </div>
+
+  <!-- Musik latar -->
+  <audio id="bg-music">
+    <source src="selamat-ulang-tahun.mp3" type="audio/mp3" />
+  </audio>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const giftBox = document.getElementById('gift-box');
+      const surpriseSection = document.getElementById('surprise-section');
+      const welcomeMessage = document.getElementById('welcome-message');
+      const bgMusic = document.getElementById('bg-music');
+
+      giftBox.addEventListener('click', function () {
+        surpriseSection.classList.remove('hidden');
+        welcomeMessage.classList.add('hidden');
+        giftBox.classList.add('hidden');
+        bgMusic.play().catch(e => console.log('Autoplay blocked:', e));
+        createConfetti();
+      });
+
+      function createConfetti() {
+        const container = document.querySelector('.container');
+        const colors = ['#ff6b6b', '#ffb8b8', '#ffd166', '#a8e6cf', '#dcedc1'];
+
+        for (let i = 0; i < 100; i++) {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.top = '0';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          confetti.style.animationDelay = (Math.random() * 2) + 's';
+          confetti.style.width = (Math.random() * 10 + 5) + 'px';
+          confetti.style.height = confetti.style.width;
+          container.appendChild(confetti);
+          setTimeout(() => confetti.remove(), 5000);
+        }
+
+        for (let i = 0; i < 5; i++) {
+          const balloon = document.createElement('div');
+          balloon.className = 'balloon';
+          balloon.style.left = Math.random() * 100 + '%';
+          balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          balloon.style.animationDuration = (Math.random() * 5 + 10) + 's';
+          container.appendChild(balloon);
+          setTimeout(() => balloon.remove(), 10000);
+        }
+
+        const confettiAudio = new Audio('https://www.soundjay.com/human/sounds/party-noisemaker-01.mp3');
+        confettiAudio.volume = 0.2;
+        confettiAudio.play().catch(e => console.log('Audio error:', e));
+      }
+    });
+  </script>
+</body>
+</html>
